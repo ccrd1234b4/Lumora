@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1b4d2e">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <title>LUMORA - Trouve un pro à Yopougon</title>
 <style>
 *{box-sizing:border-box}
@@ -38,10 +41,10 @@ footer{text-align:center;padding:20px;background:#1b4d2e;color:#fff}
 <section>
 <h2>Tu es un pro ? Inscris-toi gratuitement</h2>
 <div class="carte">
-<input id="nom" placeholder="Ton nom">
-<input id="metier" placeholder="Ton métier (ex : menuisier)">
-<input id="quartier" placeholder="Ton quartier à Yopougon">
-<input id="tel" type="tel" placeholder="Ton numéro de téléphone">
+<input id="nom" name="lumora-nom" autocomplete="off" placeholder="Ton nom">
+<input id="metier" name="lumora-metier" autocomplete="off" placeholder="Ton métier (ex : menuisier)">
+<input id="quartier" name="lumora-quartier" autocomplete="off" placeholder="Ton quartier à Yopougon">
+<input id="tel" name="lumora-tel" type="tel" autocomplete="off" placeholder="Ton numéro de téléphone">
 <button class="jaune" onclick="inscrire()">Je m'inscris sur LUMORA</button>
 </div>
 </section>
@@ -55,7 +58,7 @@ footer{text-align:center;padding:20px;background:#1b4d2e;color:#fff}
 <section>
 <h2>Avis et commentaires</h2>
 <div class="carte">
-<input id="avisnom" placeholder="Ton nom">
+<input id="avisnom" name="lumora-avisnom" autocomplete="off" placeholder="Ton nom">
 <textarea id="avis" rows="3" placeholder="Ton avis ou ton commentaire"></textarea>
 <button class="jaune" onclick="donnerAvis()">Envoyer mon avis</button>
 </div>
