@@ -1,0 +1,25 @@
+{
+  "name": "LUMORA",
+  "short_name": "LUMORA",
+  "description": "Trouve un pro près de chez toi à Yopougon",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1b4d2e",
+  "theme_color": "#1b4d2e",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}
