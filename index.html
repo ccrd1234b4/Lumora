@@ -1,84 +1,62 @@
 <!DOCTYPE html>
-<html lang="fr"><head><meta charset="utf-8">
+<html lang="fr">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1b4d2e">
+<title>LUMORA</title>
 <link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>LUMORA - Trouve un pro à Yopougon</title>
+<meta name="theme-color" content="#14532d">
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f4f1e6;color:#12301c}
-header{background:#1b4d2e;color:#f5c518;padding:28px 16px;text-align:center;border-bottom:10px solid #f5c518;background-image:repeating-linear-gradient(45deg,transparent 0 18px,rgba(245,197,24,.08) 18px 36px)}
-header h1{margin:0;font-size:38px;letter-spacing:3px}
-header p{margin:8px 0 0;color:#fff;font-size:18px}
-section{padding:20px 16px;max-width:600px;margin:auto}
-h2{border-left:8px solid #f5c518;padding-left:10px;color:#1b4d2e}
-.grille{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-button,.btn{background:#1b4d2e;color:#f5c518;border:0;border-radius:8px;padding:14px;font-size:17px;font-weight:bold;width:100%}
-.jaune{background:#f5c518;color:#1b4d2e}
-input,select,textarea{width:100%;padding:12px;margin:6px 0;font-size:17px;border:2px solid #1b4d2e;border-radius:8px}
-.carte{background:#fff;border:2px dashed #1b4d2e;border-radius:10px;padding:14px;margin-bottom:12px}
-footer{text-align:center;padding:20px;background:#1b4d2e;color:#fff}
-</style></head><body>
-
-<header>
-<h1>LUMORA</h1>
-<p>Trouve un menuisier ou un pro près de chez toi à Yopougon</p>
-</header>
-
-<section>
-<h2>Je cherche un pro</h2>
-<div class="grille">
-<button onclick="chercher('menuisier')">Menuisier</button>
-<button onclick="chercher('plombier')">Plombier</button>
-<button onclick="chercher('électricien')">Électricien</button>
-<button onclick="chercher('maçon')">Maçon</button>
-<button onclick="chercher('peintre')">Peintre</button>
-<button onclick="chercher('soudeur')">Soudeur</button>
-</div>
-</section>
-
-<section>
-<h2>Tu es un pro ? Inscris-toi gratuitement</h2>
-<div class="carte">
-<input id="nom" name="lumora-nom" autocomplete="off" placeholder="Ton nom">
-<input id="metier" name="lumora-metier" autocomplete="off" placeholder="Ton métier (ex : menuisier)">
-<input id="quartier" name="lumora-quartier" autocomplete="off" placeholder="Ton quartier à Yopougon">
-<input id="tel" name="lumora-tel" type="tel" autocomplete="off" placeholder="Ton numéro de téléphone">
-<button class="jaune" onclick="inscrire()">Je m'inscris sur LUMORA</button>
-</div>
-</section>
-
-<section>
-<h2>Vidéos</h2>
-<div class="carte">Les vidéos des professionnels arrivent bientôt. Tu veux montrer ton travail ? Envoie ta vidéo sur WhatsApp.</div>
-<button onclick="ecrire('Bonjour LUMORA, je veux envoyer une vidéo de mon travail.')">Envoyer ma vidéo</button>
-</section>
-
-<section>
-<h2>Avis et commentaires</h2>
-<div class="carte">
-<input id="avisnom" name="lumora-avisnom" autocomplete="off" placeholder="Ton nom">
-<textarea id="avis" rows="3" placeholder="Ton avis ou ton commentaire"></textarea>
-<button class="jaune" onclick="donnerAvis()">Envoyer mon avis</button>
-</div>
-</section>
-
-<footer>LUMORA - Yopougon<br>Lancement gratuit</footer>
-
+body{margin:0;font-family:Arial,sans-serif;background:#f4f1e8;color:#1a1a1a}
+header{background:#14532d;color:#facc15;padding:20px;text-align:center}
+header h1{margin:0;font-size:32px;letter-spacing:3px}
+header p{margin:6px 0 0;color:#fff}
+main{padding:14px;max-width:600px;margin:auto}
+.btn{display:block;text-align:center;padding:14px;margin:8px 0;border-radius:8px;font-weight:bold;text-decoration:none;font-size:17px}
+.jaune{background:#facc15;color:#14532d}
+.vert{background:#14532d;color:#fff}
+.carte{background:#fff;border:3px solid #14532d;border-radius:10px;padding:14px;margin:16px 0}
+.carte h2{margin:0;color:#14532d}
+.metier{color:#555;margin:4px 0 10px}
+h3{background:#facc15;color:#14532d;padding:6px 10px;border-radius:6px;margin:16px 0 8px}
+.photos{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.photos img,video{width:100%;border-radius:8px}
+.vide{color:#777;font-style:italic}
+</style>
+</head>
+<body>
+<header><h1>LUMORA</h1><p>Trouvez un professionnel à Yopougon</p></header>
+<main>
+<a class="btn jaune" id="inscrire" href="#">Je suis un professionnel : m'inscrire</a>
+<div id="liste"></div>
+</main>
 <script>
-var NUM="2250715898210";
-function ecrire(t){window.open("https://wa.me/"+NUM+"?text="+encodeURIComponent(t),"_blank");}
-function chercher(m){ecrire("Bonjour LUMORA, je cherche un "+m+" à Yopougon.");}
-function inscrire(){
-var n=document.getElementById("nom").value,m=document.getElementById("metier").value,q=document.getElementById("quartier").value,t=document.getElementById("tel").value;
-if(!n||!m||!t){alert("Remplis ton nom, ton métier et ton numéro.");return;}
-ecrire("INSCRIPTION PRO\nNom : "+n+"\nMétier : "+m+"\nQuartier : "+q+"\nTéléphone : "+t);
-}
-function donnerAvis(){
-var n=document.getElementById("avisnom").value,a=document.getElementById("avis").value;
-if(!a){alert("Écris ton avis.");return;}
-ecrire("AVIS LUMORA\nNom : "+n+"\nAvis : "+a);
-}
+var LUMORA_WA="2250715898210";
+var PROS=[
+ {
+  nom:"Fome Badra Ali",
+  metier:"Menuisier professionnel",
+  tel:"0544853364",
+  wa:"2250544853364",
+  photos:[],
+  videos:[]
+ }
+];
+document.getElementById("inscrire").href="https://wa.me/"+LUMORA_WA+"?text="+encodeURIComponent("Bonjour LUMORA, je veux m'inscrire. Mon nom : ... Mon métier : ...");
+var html="";
+PROS.forEach(function(p){
+ html+='<div class="carte"><h2>'+p.nom+'</h2><div class="metier">'+p.metier+'</div>';
+ html+='<a class="btn vert" href="tel:'+p.tel+'">Appeler</a>';
+ html+='<a class="btn jaune" href="https://wa.me/'+p.wa+'">WhatsApp</a>';
+ html+='<h3>Photos</h3>';
+ if(p.photos.length){html+='<div class="photos">'+p.photos.map(function(f){return '<img src="'+f+'">';}).join("")+'</div>';}
+ else{html+='<p class="vide">Photos bientôt</p>';}
+ html+='<h3>Vidéos</h3>';
+ if(p.videos.length){html+=p.videos.map(function(f){return '<video controls src="'+f+'"></video>';}).join("");}
+ else{html+='<p class="vide">Vidéos bientôt</p>';}
+ html+='</div>';
+});
+document.getElementById("liste").innerHTML=html;
 </script>
-</body></html>
+</body>
+</html>
